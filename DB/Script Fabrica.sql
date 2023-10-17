@@ -91,3 +91,51 @@ alter table HISTORICO_MAQUINAS
     add constraint FK_HM_T foreign key (ID_TRABAJADOR)
         references TRABAJADORES(ID_TRABAJADOR);
 
+/*==============================================================*/
+/* Table: MATERIALES                                   */
+/*==============================================================*/
+create table MATERIALES
+(
+    ID_MATERIAL     int             not null AUTO_INCREMENT,
+    NOMBRE          varchar(50)     not null,
+    constraint PK_MATERIALES primary key (ID_MATERIAL)
+)
+
+/*==============================================================*/
+/* Table: TIPO_PRODUCTOS                                   */
+/*==============================================================*/
+create table TIPO_PRODUCTOS
+(
+    ID_TIPO         int             not null AUTO_INCREMENT,
+    TIPO            varchar(50)     not null,
+    ID_MATERIAL     int             not null,
+    ID_MAQUINA      int             not null ,
+    constraint PK_TIPO_PRODUCTOS primary key (ID_TIPO)
+)
+
+alter table TIPO_PRODUCTOS
+    add constraint FK_TP_MAT foreign key (ID_MATERIAL)
+        references MATERIALES(ID_MATERIAL);
+
+alter table TIPO_PRODUCTOS
+    add constraint FK_TP_MAQ foreign key (ID_MAQUINA)
+        references MAQUINAS(NUMERO_SERIE);
+
+/*==============================================================*/
+/* Table: PRODUCTOS                                   */
+/*==============================================================*/
+create table PRODUCTOS
+(
+    ID_PRODUCTO     int             not null AUTO_INCREMENT,
+    NOMBRE          varchar(50)     not null,
+    DESCRIPCION     varchar(100)    not null,
+    PRECIO_UNITARIO double          not null,
+    ID_TIPO         int             not null ,
+    constraint PK_PRODUCTOS primary key (ID_PRODUCTO)
+)
+
+alter table PRODUCTOS
+    add constraint FK_PR_TP foreign key (ID_TIPO)
+        references TIPO_PRODUCTOS(ID_TIPO);
+
+
