@@ -2,6 +2,7 @@ package com.uptc.frw.factory.controller;
 
 import com.uptc.frw.factory.jpa.entity.Client;
 import com.uptc.frw.factory.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientController {
 
+    @Autowired
     private ClientService service;
 
     @GetMapping

@@ -3,8 +3,11 @@
 create database if not exists fabrica;
 use fabrica;
 
+
 drop table if exists DETALLE_COMPRAS;
 drop table if exists ORDEN_COMPRAS;
+drop table if exists HISTORICO_MAQUINAS;
+drop table if exists MAQUINAS;
 drop table if exists CLIENTES;
 
 /*==============================================================*/
@@ -18,6 +21,18 @@ create table CLIENTES
     TELEFONO				VARCHAR(15)			not null,
     NOMBRE_CONTACTO		VARCHAR(100)		not null,
     constraint PK_CLIENTES primary key (ID_CLIENTE)
+);
+
+/*==============================================================*/
+/* Table: MAQUINAS                                              */
+/*==============================================================*/
+create table MAQUINAS
+(
+    NUMERO_SERIE    int         not null AUTO_INCREMENT,
+    MARCA           varchar(50) not null,
+    MODELO          varchar(50) not null,
+    FECHA_COMPRA    date        not null ,
+    constraint PK_MAQUINAS primary key (NUMERO_SERIE)
 );
 
 /*==============================================================*/
@@ -56,4 +71,23 @@ alter table DETALLE_COMPRAS
 alter table DETALLE_COMPRAS
     add constraint FK_DETALLE_PRODUCTO foreign key (ID_PRODUCTO)
         references PRODUCTOS (ID_PRODUCTO);
+
+/*==============================================================*/
+/* Table: HISTORICO_MAQUINAS                                    */
+/*==============================================================*/
+create table HISTORICO_MAQUINAS
+(
+    ID_TRABAJADOR   int     not null,
+    ID_MAQUINA      int     not null,
+    FECHA           date    not null,
+    constraint PK_HISTORICO_MAQUINAS primary key (ID_TRABAJADOR,ID_MAQUINA,FECHA)
+)
+
+alter table HISTORICO_MAQUINAS
+    add constraint FK_HM_M foreign key (ID_MAQUINA)
+        references MAQUINAS(NUMERO_SERIE);
+
+alter table HISTORICO_MAQUINAS
+    add constraint FK_HM_T foreign key (ID_TRABAJADOR)
+        references TRABAJADORES(ID_TRABAJADOR);
 
