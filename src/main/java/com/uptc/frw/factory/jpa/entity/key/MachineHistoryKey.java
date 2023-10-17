@@ -1,35 +1,29 @@
-package com.uptc.frw.factory.jpa.entity;
+package com.uptc.frw.factory.jpa.entity.key;
 
-import com.uptc.frw.factory.jpa.entity.key.MachineHistoryKey;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
-import javax.persistence.*;
+@Embeddable
+public class MachineHistoryKey implements Serializable {
 
-@Entity
-@Table(name = "HISTORICO_MAQUINAS")
-@IdClass(MachineHistoryKey.class)
-public class MachineHistory {
-
-    @Id
     @Column(name = "ID_TRABAJADOR")
     private Long workerId;
 
-    @Id
     @Column(name = "ID_MAQUINA")
     private Long machineId;
 
-    @Id
     @Column(name = "FECHA")
     private Long date;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_MAQUINA")
-    private Machine machine;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ID_TRABAJADOR")
-//    private Worker worker;
+    public MachineHistoryKey() {
+    }
 
-    public MachineHistory() {
+    public MachineHistoryKey(Long workerId, Long machineId, Long date) {
+        this.workerId = workerId;
+        this.machineId = machineId;
+        this.date = date;
     }
 
     public Long getWorkerId() {
@@ -56,17 +50,9 @@ public class MachineHistory {
         this.date = date;
     }
 
-    public Machine getMachine() {
-        return machine;
-    }
-
-    public void setMachine(Machine machine) {
-        this.machine = machine;
-    }
-
     @Override
     public String toString() {
-        return "MachineHistory{" +
+        return "MachineHistoryKey{" +
                 "workerId=" + workerId +
                 ", machineId=" + machineId +
                 ", date=" + date +

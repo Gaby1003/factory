@@ -67,4 +67,14 @@ public class Machine {
     public void setMachineHistories(List<MachineHistory> machineHistories) {
         this.machineHistories = machineHistories;
     }
+
+    @Override
+    public String toString() {
+        return "Machine{" +
+                "serialNumber='" + serialNumber + '\'' +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", purchaseDate=" + purchaseDate +
+                '}';
+    }
 }

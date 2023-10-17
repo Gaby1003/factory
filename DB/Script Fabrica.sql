@@ -6,6 +6,8 @@ use fabrica;
 
 drop table if exists DETALLE_COMPRAS;
 drop table if exists ORDEN_COMPRAS;
+drop table if exists HISTORICO_MAQUINAS;
+drop table if exists MAQUINAS;
 drop table if exists CLIENTES;
 
 /*==============================================================*/
@@ -19,6 +21,18 @@ create table CLIENTES
     TELEFONO				VARCHAR(15)			not null,
     NOMBRE_CONTACTO		VARCHAR(100)		not null,
     constraint PK_CLIENTES primary key (ID_CLIENTE)
+);
+
+/*==============================================================*/
+/* Table: MAQUINAS                                              */
+/*==============================================================*/
+create table MAQUINAS
+(
+    NUMERO_SERIE    int         not null AUTO_INCREMENT,
+    MARCA           varchar(50) not null,
+    MODELO          varchar(50) not null,
+    FECHA_COMPRA    date        not null ,
+    constraint PK_MAQUINAS primary key (NUMERO_SERIE)
 );
 
 /*==============================================================*/
@@ -57,25 +71,6 @@ alter table DETALLE_COMPRAS
 alter table DETALLE_COMPRAS
     add constraint FK_DETALLE_PRODUCTO foreign key (ID_PRODUCTO)
         references PRODUCTOS (ID_PRODUCTO);
-
-
-
-drop table if exists MAQUINAS;
-drop table if exists HISTORICO_MAQUINAS;
-
-
-/*==============================================================*/
-/* Table: MAQUINAS                                              */
-/*==============================================================*/
-create table MAQUINAS
-(
-    NUMERO_SERIE    int         not null AUTO_INCREMENT,
-    MARCA           varchar(50) not null,
-    MODELO          varchar(50) not null,
-    FECHA_COMPRA    date        not null ,
-    constraint PK_MAQUINAS primary key (NUMERO_SERIE)
-);
-
 
 /*==============================================================*/
 /* Table: HISTORICO_MAQUINAS                                    */
