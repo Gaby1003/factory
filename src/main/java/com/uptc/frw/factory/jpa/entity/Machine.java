@@ -24,6 +24,8 @@ public class Machine {
 
     @OneToMany(mappedBy = "machine")
     private List<MachineHistory> machineHistories;
+    @OneToMany(mappedBy = "machine")
+    private List<ProductType> productTypes;
 
     public Machine() {
     }
@@ -66,6 +68,14 @@ public class Machine {
 
     public void setMachineHistories(List<MachineHistory> machineHistories) {
         this.machineHistories = machineHistories;
+    }
+
+    public List<ProductType> getProductTypes() {
+        return productTypes;
+    }
+
+    public void setProductTypes(List<ProductType> productTypes) {
+        this.productTypes = productTypes;
     }
 
     @Override

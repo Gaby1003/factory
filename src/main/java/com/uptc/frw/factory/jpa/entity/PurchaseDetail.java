@@ -28,9 +28,9 @@ public class PurchaseDetail {
     @JoinColumn(name = "ID_ORDEN", nullable = false)
     private PurchaseOrder order;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "ID_PRODUCTO", nullable = false)
-    private Product product;*/
+    private Product product;
 
     public PurchaseDetail() {
     }
@@ -79,6 +79,14 @@ public class PurchaseDetail {
 
     public void setOrder(PurchaseOrder order) {
         this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
