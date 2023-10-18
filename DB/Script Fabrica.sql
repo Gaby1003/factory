@@ -9,6 +9,9 @@ drop table if exists ORDEN_COMPRAS;
 drop table if exists HISTORICO_MAQUINAS;
 drop table if exists MAQUINAS;
 drop table if exists CLIENTES;
+drop table if exists TRABAJADORES;
+drop table if exists HABILIDADES;
+drop table if exists HABILIDADES_TRABAJADOR;
 
 /*==============================================================*/
 /* Table: CLIENTES                                              */
@@ -91,3 +94,42 @@ alter table HISTORICO_MAQUINAS
     add constraint FK_HM_T foreign key (ID_TRABAJADOR)
         references TRABAJADORES(ID_TRABAJADOR);
 
+/*==============================================================*/
+/* Tabla: TRABAJADORES                                          */
+/*==============================================================*/
+create table TRABAJADORES
+(
+    ID_TRABAJADOR        int              not null AUTO_INCREMENT,
+    NOMBRE               VARCHAR(50)        not null,
+    APELLIDO             VARCHAR(50)        not null,
+    FECHA_NACIMIENTO 	DATE			   not null,
+    DIRECCION 			VARCHAR(70)        not null,
+    constraint PK_TRABAJADORES primary key (ID_TRABAJADOR)
+);
+/*==============================================================*/
+/* Tabla: HABILIDADES                                           */
+/*==============================================================*/
+create table HABILIDADES
+(
+    ID_HABILIDAD         int              not null AUTO_INCREMENT,
+    NOMBRE              VARCHAR(50)         not null,
+    DESCRIPCION         VARCHAR(200)         not null,
+    constraint PK_HABILIDADES primary key (ID_HABILIDAD)
+);
+/*==============================================================*/
+/* Tabla: HABILIDADES_TRABAJADOR                                */
+/*==============================================================*/
+create table HABILIDADES_TRABAJADOR
+(
+    ID_HABILIDAD         int              not null,
+    ID_TRABAJADOR        int              not null,
+    constraint PK_HABILIDADES_TRABAJADOR primary key (ID_HABILIDAD,ID_TRABAJADOR)
+);
+
+alter table HABILIDADES_TRABAJADOR
+    add constraint FK_HT_TRABAJADOR foreign key (ID_TRABAJADOR)
+        references TRABAJADORES (ID_TRABAJADOR);
+
+alter table HABILIDADES_TRABAJADOR
+    add constraint FK_HT_HABILIDADES foreign key (ID_HABILIDAD)
+        references HABILIDADES (ID_HABILIDAD);
