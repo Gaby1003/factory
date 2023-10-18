@@ -6,12 +6,16 @@ use fabrica;
 
 drop table if exists DETALLE_COMPRAS;
 drop table if exists ORDEN_COMPRAS;
+drop table if exists PRODUCTOS;
+drop table if exists TIPO_PRODUCTOS;
 drop table if exists HISTORICO_MAQUINAS;
+drop table if exists HABILIDADES_TRABAJADOR;
 drop table if exists MAQUINAS;
 drop table if exists CLIENTES;
 drop table if exists TRABAJADORES;
 drop table if exists HABILIDADES;
-drop table if exists HABILIDADES_TRABAJADOR;
+drop table if exists MATERIALES;
+
 
 /*==============================================================*/
 /* Table: CLIENTES                                              */
@@ -33,7 +37,7 @@ create table MATERIALES
     ID_MATERIAL     int             not null AUTO_INCREMENT,
     NOMBRE          varchar(50)     not null,
     constraint PK_MATERIALES primary key (ID_MATERIAL)
-)
+);
 
 
 /*==============================================================*/
@@ -58,7 +62,7 @@ create table TIPO_PRODUCTOS
     ID_MATERIAL     int             not null,
     ID_MAQUINA      int             not null ,
     constraint PK_TIPO_PRODUCTOS primary key (ID_TIPO)
-)
+);
 
 alter table TIPO_PRODUCTOS
     add constraint FK_TP_MAT foreign key (ID_MATERIAL)
@@ -96,7 +100,7 @@ create table PRODUCTOS
     PRECIO_UNITARIO double          not null,
     ID_TIPO         int             not null ,
     constraint PK_PRODUCTOS primary key (ID_PRODUCTO)
-)
+);
 
 alter table PRODUCTOS
     add constraint FK_PR_TP foreign key (ID_TIPO)
@@ -110,7 +114,7 @@ alter table PRODUCTOS
 create table DETALLE_COMPRAS
 (
     ID_PRODUCTO			int        			not null AUTO_INCREMENT,
-    ID_ORDEN         	date        		not null,
+    ID_ORDEN         	int        		not null,
     CANTIDAD				int					not null,
     PRECIO_UNITARIO		double(10,2)		not null,
     constraint PK_DETALLE primary key (ID_PRODUCTO, ID_ORDEN)
@@ -173,7 +177,7 @@ create table HISTORICO_MAQUINAS
     ID_MAQUINA      int     not null,
     FECHA           date    not null,
     constraint PK_HISTORICO_MAQUINAS primary key (ID_TRABAJADOR,ID_MAQUINA,FECHA)
-)
+);
 
 alter table HISTORICO_MAQUINAS
     add constraint FK_HM_M foreign key (ID_MAQUINA)
@@ -182,6 +186,3 @@ alter table HISTORICO_MAQUINAS
 alter table HISTORICO_MAQUINAS
     add constraint FK_HM_T foreign key (ID_TRABAJADOR)
         references TRABAJADORES(ID_TRABAJADOR);
-
-
-
