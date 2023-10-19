@@ -13,7 +13,7 @@ public class Machine {
     @Id
     @Column(name = "NUMERO_SERIE")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String serialNumber;
+    private Long serialNumber;
 
     @Column(name = "MARCA")
     private String brand;
@@ -35,11 +35,11 @@ public class Machine {
     public Machine() {
     }
 
-    public String getSerialNumber() {
+    public Long getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
+    public void setSerialNumber(Long serialNumber) {
         this.serialNumber = serialNumber;
     }
 
