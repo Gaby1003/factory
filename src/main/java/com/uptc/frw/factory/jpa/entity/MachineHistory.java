@@ -1,5 +1,6 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uptc.frw.factory.jpa.entity.key.MachineHistoryKey;
 
 import javax.persistence.*;
@@ -21,13 +22,15 @@ public class MachineHistory {
     @Column(name = "FECHA")
     private Long date;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_MAQUINA")
+    @JoinColumn(name = "ID_MAQUINA", insertable = false, updatable = false)
     private Machine machine;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ID_TRABAJADOR")
-//    private Worker worker;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "ID_TRABAJADOR", insertable = false, updatable = false)
+    private Worker worker;
 
     public MachineHistory() {
     }
@@ -62,6 +65,14 @@ public class MachineHistory {
 
     public void setMachine(Machine machine) {
         this.machine = machine;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @Override

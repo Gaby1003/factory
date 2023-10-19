@@ -1,5 +1,6 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uptc.frw.factory.jpa.entity.key.PurchaseDetailKey;
 
 import javax.persistence.*;
@@ -11,11 +12,11 @@ import java.util.Date;
 public class PurchaseDetail {
 
     @Id
-    @Column(name = "ID_PRODUCTO", insertable = false, updatable = false)
+    @Column(name = "ID_PRODUCTO")
     private Long productId;
 
     @Id
-    @Column(name = "ID_ORDEN", insertable = false, updatable = false)
+    @Column(name = "ID_ORDEN")
     private Long orderId;
 
     @Column(name = "CANTIDAD")
@@ -24,13 +25,15 @@ public class PurchaseDetail {
     @Column(name = "PRECIO_UNITARIO")
     private int unitPrice;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_ORDEN", nullable = false)
+    @JoinColumn(name = "ID_ORDEN", insertable = false, updatable = false)
     private PurchaseOrder order;
 
-    /*@ManyToOne
-    @JoinColumn(name = "ID_PRODUCTO", nullable = false)
-    private Product product;*/
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "ID_PRODUCTO", insertable = false, updatable = false)
+    private Product product;
 
     public PurchaseDetail() {
     }
@@ -79,6 +82,14 @@ public class PurchaseDetail {
 
     public void setOrder(PurchaseOrder order) {
         this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +24,13 @@ public class Machine {
     @Column(name = "FECHA_COMPRA")
     private Date purchaseDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "machine")
     private List<MachineHistory> machineHistories;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "machine")
+    private List<ProductType> productTypes;
 
     public Machine() {
     }
@@ -66,6 +73,14 @@ public class Machine {
 
     public void setMachineHistories(List<MachineHistory> machineHistories) {
         this.machineHistories = machineHistories;
+    }
+
+    public List<ProductType> getProductTypes() {
+        return productTypes;
+    }
+
+    public void setProductTypes(List<ProductType> productTypes) {
+        this.productTypes = productTypes;
     }
 
     @Override
