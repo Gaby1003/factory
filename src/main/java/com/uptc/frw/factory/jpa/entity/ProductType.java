@@ -17,7 +17,7 @@ public class ProductType {
     @Column(name = "ID_MATERIAL", insertable = false, updatable = false)
     private Long idMaterial;
     @Column(name = "ID_MAQUINA", insertable = false, updatable = false)
-    private String idMachine;
+    private Long idMachine;
 
     @JsonIgnore
     @ManyToOne
@@ -27,7 +27,7 @@ public class ProductType {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_MAQUINA")
-    private Machine machine;
+    private Machine machineType;
 
     @JsonIgnore
     @OneToMany(mappedBy = "productType")
@@ -36,7 +36,7 @@ public class ProductType {
     public ProductType() {
     }
 
-    public ProductType(String type, Long idMaterial, String idMachine) {
+    public ProductType(String type, Long idMaterial, Long idMachine) {
         this.type = type;
         this.idMaterial = idMaterial;
         this.idMachine = idMachine;
@@ -55,7 +55,7 @@ public class ProductType {
     }
 
     public void setType(String type) {
-        type = type;
+        this.type = type;
     }
 
     public Long getIdMaterial() {
@@ -66,11 +66,11 @@ public class ProductType {
         this.idMaterial = idMaterial;
     }
 
-    public String getIdMachine() {
+    public Long getIdMachine() {
         return idMachine;
     }
 
-    public void setIdMachine(String idMachine) {
+    public void setIdMachine(Long idMachine) {
         this.idMachine = idMachine;
     }
 
@@ -83,11 +83,11 @@ public class ProductType {
     }
 
     public Machine getMachine() {
-        return machine;
+        return machineType;
     }
 
     public void setMachine(Machine machine) {
-        this.machine = machine;
+        this.machineType = machine;
     }
 
     public List<Product> getProducts() {
@@ -102,7 +102,7 @@ public class ProductType {
     public String toString() {
         return "ProductType{" +
                 "idType=" + idType +
-                ", Type='" + type + '\'' +
+                ", type='" + type + '\'' +
                 ", idMaterial=" + idMaterial +
                 ", idMachine=" + idMachine +
                 '}';

@@ -29,7 +29,7 @@ public class Machine {
     private List<MachineHistory> machineHistories;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "machine",cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "machineType",cascade = {CascadeType.REMOVE})
     private List<ProductType> productTypes;
 
     public Machine() {
