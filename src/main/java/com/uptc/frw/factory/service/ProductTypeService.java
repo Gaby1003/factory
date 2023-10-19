@@ -23,6 +23,7 @@ public class ProductTypeService {
     public String updateProductType(Long idProductType,String type){
         ProductType productType=findProductType(idProductType);
         productType.setType(type);
+        repository.save(productType);
         return "Tipo de producto con ID "+idProductType+" actualizado con exito.";
     }
     public String deleteMaterial(Long idProductType){

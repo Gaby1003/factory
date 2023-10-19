@@ -28,7 +28,7 @@ public class Client {
     private String contactName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client",cascade = CascadeType.REMOVE)
     private List<PurchaseOrder> orders;
 
     public Client() {

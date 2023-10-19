@@ -14,6 +14,7 @@ public class ProductType {
     private Long idType;
     @Column(name = "TIPO")
     private String type;
+
     @Column(name = "ID_MATERIAL")
     private Long idMaterial;
     @Column(name = "ID_MAQUINA")
@@ -26,11 +27,11 @@ public class ProductType {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_MAQUINA", insertable = false, updatable = false)
-    private Machine machine;
+    @JoinColumn(name = "ID_MAQUINA",insertable = false, updatable = false)
+    private Machine machineType;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productType")
+    @OneToMany(mappedBy = "productType",cascade = CascadeType.REMOVE)
     private List<Product> products;
 
     public ProductType() {
@@ -83,11 +84,11 @@ public class ProductType {
     }
 
     public Machine getMachine() {
-        return machine;
+        return machineType;
     }
 
     public void setMachine(Machine machine) {
-        this.machine = machine;
+        this.machineType = machine;
     }
 
     public List<Product> getProducts() {
@@ -102,7 +103,7 @@ public class ProductType {
     public String toString() {
         return "ProductType{" +
                 "idType=" + idType +
-                ", Type='" + type + '\'' +
+                ", type='" + type + '\'' +
                 ", idMaterial=" + idMaterial +
                 ", idMachine=" + idMachine +
                 '}';

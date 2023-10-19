@@ -33,7 +33,7 @@ public class PurchaseOrder {
     private Client client;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE)
     private List<PurchaseDetail> details;
 
     public PurchaseOrder() {
@@ -109,6 +109,7 @@ public class PurchaseOrder {
                 ", purchaseDate=" + purchaseDate +
                 ", estimatedDelivery=" + estimatedDelivery +
                 ", realDelivery=" + realDelivery +
+                ", idClient=" + idClient +
                 '}';
     }
 }

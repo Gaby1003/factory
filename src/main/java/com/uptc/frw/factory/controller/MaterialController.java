@@ -17,7 +17,7 @@ public class MaterialController {
     public List<Material> findAllMaterials() {
         return service.findAllMaterials();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{materialId}")
     public Material findMaterial(@PathVariable Long materialId) {
         return service.findMaterial(materialId);
     }
@@ -25,11 +25,11 @@ public class MaterialController {
     public Material saveMaterial(@RequestBody Material material) {
         return service.saveMaterial(material);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/{idMaterial}")
     public String updateMaterial(@PathVariable Long idMaterial,@RequestParam String name) {
         return service.updateMaterial(idMaterial, name);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idMaterial}")
     public String deleteMaterial(@PathVariable Long idMaterial) {
         return service.deleteMaterial(idMaterial);
     }

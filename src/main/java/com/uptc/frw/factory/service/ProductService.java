@@ -24,6 +24,7 @@ public class ProductService {
     public String updateProduct(Long idProduct,String name){
         Product product= findProduct(idProduct);
         product.setName(name);
+        repository.save(product);
         return "Producto con ID "+idProduct+" actualizado con exito.";
     }
     public String deleteProduct(Long idProduct){
