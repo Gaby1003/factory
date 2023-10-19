@@ -13,11 +13,11 @@ public class ProductType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idType;
     @Column(name = "TIPO")
-    private String Type;
+    private String type;
     @Column(name = "ID_MATERIAL", insertable = false, updatable = false)
     private Long idMaterial;
     @Column(name = "ID_MAQUINA", insertable = false, updatable = false)
-    private Long idMachine;
+    private String idMachine;
 
     @JsonIgnore
     @ManyToOne
@@ -36,26 +36,10 @@ public class ProductType {
     public ProductType() {
     }
 
-    public ProductType(String type, Long idMaterial, Long idMachine) {
-        Type = type;
+    public ProductType(String type, Long idMaterial, String idMachine) {
+        this.type = type;
         this.idMaterial = idMaterial;
         this.idMachine = idMachine;
-    }
-
-    public ProductType(Long idType, String type, Long idMaterial, Long idMachine) {
-        this.idType = idType;
-        Type = type;
-        this.idMaterial = idMaterial;
-        this.idMachine = idMachine;
-    }
-
-    public ProductType(String type, Long idMaterial, Long idMachine, Material material, Machine machine, List<Product> products) {
-        Type = type;
-        this.idMaterial = idMaterial;
-        this.idMachine = idMachine;
-        this.material = material;
-        this.machine = machine;
-        this.products = products;
     }
 
     public Long getIdType() {
@@ -67,11 +51,11 @@ public class ProductType {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        type = type;
     }
 
     public Long getIdMaterial() {
@@ -82,11 +66,11 @@ public class ProductType {
         this.idMaterial = idMaterial;
     }
 
-    public Long getIdMachine() {
+    public String getIdMachine() {
         return idMachine;
     }
 
-    public void setIdMachine(Long idMachine) {
+    public void setIdMachine(String idMachine) {
         this.idMachine = idMachine;
     }
 
@@ -118,7 +102,7 @@ public class ProductType {
     public String toString() {
         return "ProductType{" +
                 "idType=" + idType +
-                ", Type='" + Type + '\'' +
+                ", Type='" + type + '\'' +
                 ", idMaterial=" + idMaterial +
                 ", idMachine=" + idMachine +
                 '}';
