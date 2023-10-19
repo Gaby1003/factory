@@ -31,6 +31,7 @@ public class Worker {
     )
     private List<Skill> skillList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "worker")
     private List<MachineHistory> machineHistoryList;
 

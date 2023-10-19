@@ -17,9 +17,14 @@ public class Skill {
     @Column(name = "DESCRIPCION")
     private String description;
     @JsonIgnore
-    @ManyToMany(mappedBy = "skillList")
+    @ManyToMany(mappedBy = "skillList",cascade = {CascadeType.REMOVE})
     private List<Worker> workerList;
     public Skill() {
+    }
+
+    public Skill(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public Skill(String name, String description, List<Worker> workerList) {

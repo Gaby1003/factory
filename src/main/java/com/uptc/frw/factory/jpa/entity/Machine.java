@@ -25,11 +25,11 @@ public class Machine {
     private Date purchaseDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "machine")
+    @OneToMany(mappedBy = "machine",cascade = {CascadeType.REMOVE})
     private List<MachineHistory> machineHistories;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "machine")
+    @OneToMany(mappedBy = "machine",cascade = {CascadeType.REMOVE})
     private List<ProductType> productTypes;
 
     public Machine() {

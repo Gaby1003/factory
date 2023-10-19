@@ -21,15 +21,15 @@ public class MachineService {
         return repository.save(machine);
     }
 
-    public Machine findMachine(Long id){
+    public Machine findMachine(String id){
         return repository.findById(id).get();
     }
 
-    public void deleteMachine(Long id){
+    public void deleteMachine(String id){
         repository.deleteById(id);
     }
 
-    public Machine updateModel(Long id, String model){
+    public Machine updateModel(String id, String model){
         Machine machine = findMachine(id);
         machine.setModel(model);
         return saveMachine(machine);

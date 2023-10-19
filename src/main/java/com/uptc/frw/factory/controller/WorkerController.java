@@ -1,5 +1,6 @@
 package com.uptc.frw.factory.controller;
 
+import com.uptc.frw.factory.jpa.entity.Skill;
 import com.uptc.frw.factory.jpa.entity.Worker;
 import com.uptc.frw.factory.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class WorkerController {
     @PutMapping("/{id}")
     public Worker updateWorker(@PathVariable Long id,@RequestParam String address){
         return service.updateAddress(id,address);
+    }
+    @PostMapping("/skills")
+    public List<Skill> saveSkillsWorker(@PathVariable Long id, @RequestBody List<Skill> skills){
+        return service.saveSkillsWorker(id, skills);
     }
 }
