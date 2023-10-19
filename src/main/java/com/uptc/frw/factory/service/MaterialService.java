@@ -24,6 +24,7 @@ public class MaterialService {
     public String updateMaterial(Long idMaterial,String name){
         Material material= findMaterial(idMaterial);
         material.setName(name);
+        repository.save(material);
         return "Material con ID "+idMaterial+" actualizado con exito.";
     }
     public String deleteMaterial(Long idMaterial){

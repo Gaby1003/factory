@@ -17,19 +17,19 @@ public class ProductController {
     public List<Product> findAllProducts() {
         return service.findAllProducts();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{idProduct}")
     public Product findProduct(@PathVariable Long idProduct) {
         return service.findProduct(idProduct);
     }
     @PostMapping
-    public Product saveProdct(@RequestBody Product product) {
+    public Product saveProduct(@RequestBody Product product) {
         return service.saveProdct(product);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/{idProduct}")
     public String updateProduct(@PathVariable Long idProduct,@RequestParam String name) {
         return service.updateProduct(idProduct, name);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idProduct}")
     public String deleteProduct(@PathVariable Long idProduct) {
         return service.deleteProduct(idProduct);
     }
