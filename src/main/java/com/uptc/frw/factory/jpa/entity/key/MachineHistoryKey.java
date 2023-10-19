@@ -13,7 +13,7 @@ public class MachineHistoryKey implements Serializable {
     private Long workerId;
 
     @Column(name = "ID_MAQUINA")
-    private String machineId;
+    private Long machineId;
 
     @Column(name = "FECHA")
     private Date date;
@@ -21,7 +21,7 @@ public class MachineHistoryKey implements Serializable {
     public MachineHistoryKey() {
     }
 
-    public MachineHistoryKey(Long workerId, String machineId, Date date) {
+    public MachineHistoryKey(Long workerId, Long machineId, Date date) {
         this.workerId = workerId;
         this.machineId = machineId;
         this.date = date;
@@ -35,11 +35,11 @@ public class MachineHistoryKey implements Serializable {
         this.workerId = workerId;
     }
 
-    public String getMachineId() {
+    public Long getMachineId() {
         return machineId;
     }
 
-    public void setMachineId(String machineId) {
+    public void setMachineId(Long machineId) {
         this.machineId = machineId;
     }
 

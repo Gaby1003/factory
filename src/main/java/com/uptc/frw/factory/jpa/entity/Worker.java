@@ -23,7 +23,7 @@ public class Worker {
     private String address;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.REMOVE})
     @JoinTable(
             name = "HABILIDADES_TRABAJADOR",
             joinColumns = {@JoinColumn(name = "ID_TRABAJADOR")},
@@ -32,7 +32,7 @@ public class Worker {
     private List<Skill> skillList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "worker")
+    @OneToMany(mappedBy = "worker",cascade = {CascadeType.REMOVE})
     private List<MachineHistory> machineHistoryList;
 
     public Worker() {

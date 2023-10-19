@@ -17,7 +17,7 @@ public class MachineHistory {
 
     @Id
     @Column(name = "ID_MAQUINA")
-    private String machineId;
+    private Long machineId;
 
     @Id
     @Column(name = "FECHA")
@@ -44,11 +44,11 @@ public class MachineHistory {
         this.workerId = workerId;
     }
 
-    public String getMachineId() {
+    public Long getMachineId() {
         return machineId;
     }
 
-    public void setMachineId(String machineId) {
+    public void setMachineId(Long machineId) {
         this.machineId = machineId;
     }
 

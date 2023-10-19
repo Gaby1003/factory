@@ -25,17 +25,17 @@ public class MachineController {
     }
 
     @GetMapping("/{id}")
-    public Machine findMachine(@PathVariable String id){
+    public Machine findMachine(@PathVariable Long id){
         return service.findMachine(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMachine(@PathVariable String id){
+    public void deleteMachine(@PathVariable Long id){
         service.deleteMachine(id);
     }
 
     @PutMapping("/{id}")
-    public Machine updateModel(@PathVariable String id, @RequestParam String model){
+    public Machine updateModel(@PathVariable Long id, @RequestParam String model){
         return service.updateModel(id, model);
     }
 }
