@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ClientService {
@@ -13,25 +14,42 @@ public class ClientService {
     @Autowired
     public ClientRepository repository;
 
+    @Autowired
+    private LogService logService;
+
     public List<Client> findAllClient(){
-        return repository.findAll();
+        List<Client> clients = repository.findAll();
+        logService.createLogList(clients.getClass().getSimpleName(),clients);
+        return clients;
     }
 
     public Client saveClient(Client client){
+        logService.createLogAdd(client.toString(), client.getId(),client.getClass().getSimpleName());
         return repository.save(client);
     }
 
     public Client findClient(Long id){
-        return repository.findById(id).get();
+        Client client = repository.findById(id).get();
+        logService.createLogRead(client.toString(),client.getId(),client.getClass().getSimpleName());
+        return client;
     }
 
     public void deleteClient(Long id){
-        repository.deleteById(id);
+        try {
+            Client client = repository.findById(id).get();
+            logService.createLogDelete(client.toString(),client.getId(),client.getClass().getSimpleName());
+            repository.deleteById(id);
+
+        }catch (NoSuchElementException e){
+            throw new RuntimeException("No se encontro el registro a eliminar");
+        }
     }
 
     public Client updatePhone(Long id, String phone){
         Client client = findClient(id);
+        Client clientAux = findClient(id);
         client.setPhone(phone);
+        logService.createLogUpdate(clientAux.toString(),client.toString(),client.getId(),client.getClass().getSimpleName());
         return saveClient(client);
     }
 

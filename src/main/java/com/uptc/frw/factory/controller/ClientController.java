@@ -1,10 +1,13 @@
 package com.uptc.frw.factory.controller;
 
 import com.uptc.frw.factory.jpa.entity.Client;
+import com.uptc.frw.factory.jpa.entity.Log;
 import com.uptc.frw.factory.service.ClientService;
+import com.uptc.frw.factory.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Table;
 import java.util.List;
 
 @RestController
