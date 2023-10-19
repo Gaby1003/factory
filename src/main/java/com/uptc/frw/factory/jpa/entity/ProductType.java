@@ -14,14 +14,15 @@ public class ProductType {
     private Long idType;
     @Column(name = "TIPO")
     private String type;
-    @Column(name = "ID_MATERIAL", insertable = false, updatable = false)
+
+    @Column(name = "ID_MATERIAL")
     private Long idMaterial;
-    @Column(name = "ID_MAQUINA", insertable = false, updatable = false)
+    @Column(name = "ID_MAQUINA")
     private Long idMachine;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_MATERIAL")
+    @JoinColumn(name = "ID_MATERIAL", insertable = false, updatable = false)
     private Material material;
 
     @JsonIgnore

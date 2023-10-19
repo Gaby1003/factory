@@ -24,12 +24,12 @@ public class PurchaseOrder {
     @Column(name = "ENTREGA_REAL")
     private Date realDelivery;
 
-    @Column(name = "ID_CLIENTE", insertable = false, updatable = false)
+    @Column(name = "ID_CLIENTE")
     private Long idClient;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_CLIENTE", nullable = false)
+    @JoinColumn(name = "ID_CLIENTE", insertable = false, updatable = false)
     private Client client;
 
     @JsonIgnore
