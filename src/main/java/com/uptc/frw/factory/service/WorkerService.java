@@ -1,5 +1,6 @@
 package com.uptc.frw.factory.service;
 
+import com.uptc.frw.factory.jpa.entity.Skill;
 import com.uptc.frw.factory.jpa.entity.Worker;
 import com.uptc.frw.factory.jpa.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,15 @@ import java.util.List;
 public class WorkerService {
     @Autowired
     public WorkerRepository repository;
+
+    @Autowired
+    private SkillService skillService;
+    public List<Skill> saveSkillsWorker(Long id, List<Skill> skills){
+        Worker worker = findWorker(id);
+        worker.setSkillList(skills);
+        repository.save(worker);
+        return skills;
+    }
 
     public List<Worker> findAllWorker(){return repository.findAll();}
     public Worker saveWorker(Worker worker){return repository.save(worker);}

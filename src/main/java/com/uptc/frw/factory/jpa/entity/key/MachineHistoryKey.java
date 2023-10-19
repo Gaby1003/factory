@@ -2,7 +2,9 @@ package com.uptc.frw.factory.jpa.entity.key;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.Date;
 
 @Embeddable
 public class MachineHistoryKey implements Serializable {
@@ -11,16 +13,15 @@ public class MachineHistoryKey implements Serializable {
     private Long workerId;
 
     @Column(name = "ID_MAQUINA")
-    private Long machineId;
+    private String machineId;
 
     @Column(name = "FECHA")
-    private Long date;
-
+    private Date date;
 
     public MachineHistoryKey() {
     }
 
-    public MachineHistoryKey(Long workerId, Long machineId, Long date) {
+    public MachineHistoryKey(Long workerId, String machineId, Date date) {
         this.workerId = workerId;
         this.machineId = machineId;
         this.date = date;
@@ -34,19 +35,19 @@ public class MachineHistoryKey implements Serializable {
         this.workerId = workerId;
     }
 
-    public Long getMachineId() {
+    public String getMachineId() {
         return machineId;
     }
 
-    public void setMachineId(Long machineId) {
+    public void setMachineId(String machineId) {
         this.machineId = machineId;
     }
 
-    public Long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -54,7 +55,7 @@ public class MachineHistoryKey implements Serializable {
     public String toString() {
         return "MachineHistoryKey{" +
                 "workerId=" + workerId +
-                ", machineId=" + machineId +
+                ", machineId='" + machineId + '\'' +
                 ", date=" + date +
                 '}';
     }

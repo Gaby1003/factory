@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uptc.frw.factory.jpa.entity.key.MachineHistoryKey;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "HISTORICO_MAQUINAS")
@@ -16,11 +17,11 @@ public class MachineHistory {
 
     @Id
     @Column(name = "ID_MAQUINA")
-    private Long machineId;
+    private String machineId;
 
     @Id
     @Column(name = "FECHA")
-    private Long date;
+    private Date date;
 
     @JsonIgnore
     @ManyToOne
@@ -43,19 +44,19 @@ public class MachineHistory {
         this.workerId = workerId;
     }
 
-    public Long getMachineId() {
+    public String getMachineId() {
         return machineId;
     }
 
-    public void setMachineId(Long machineId) {
+    public void setMachineId(String machineId) {
         this.machineId = machineId;
     }
 
-    public Long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -79,8 +80,10 @@ public class MachineHistory {
     public String toString() {
         return "MachineHistory{" +
                 "workerId=" + workerId +
-                ", machineId=" + machineId +
+                ", machineId='" + machineId + '\'' +
                 ", date=" + date +
+                ", machine=" + machine +
+                ", worker=" + worker +
                 '}';
     }
 }
