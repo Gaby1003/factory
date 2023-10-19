@@ -27,11 +27,11 @@ public class ProductType {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_MAQUINA")
+    @JoinColumn(name = "ID_MAQUINA",insertable = false, updatable = false)
     private Machine machineType;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productType")
+    @OneToMany(mappedBy = "productType",cascade = CascadeType.REMOVE)
     private List<Product> products;
 
     public ProductType() {

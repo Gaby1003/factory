@@ -95,7 +95,9 @@ public class PurchaseDetail {
     @Override
     public String toString() {
         return "PurchaseDetail{" +
-                "quantity=" + quantity +
+                "productId=" + productId +
+                ", orderId=" + orderId +
+                ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +
                 '}';
     }

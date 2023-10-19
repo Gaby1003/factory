@@ -16,7 +16,7 @@ public class Material {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "material")
+    @OneToMany(mappedBy = "material",cascade = CascadeType.REMOVE)
     private List<ProductType> productTypes;
 
     public Material() {
