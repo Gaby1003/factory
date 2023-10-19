@@ -4,10 +4,13 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "logIndex")
+import javax.persistence.Id;
+
+@Document(indexName = "logindex")
 public class Log {
 
 
+    @Id
     private String id;
 
     @Field(type = FieldType.Text, name = "description")
@@ -22,16 +25,21 @@ public class Log {
     @Field(type = FieldType.Text, name = "afterState")
     private String afterState;
 
+    @Field(type = FieldType.Text, name = "table")
+    private String table;
+
     @Field(type = FieldType.Text, name = "idRegister")
     private String idRegister;
 
+    public Log() {
+    }
 
-    public Log(String id, String description, String action, String beforeState, String afterState, String idRegister) {
-        this.id = id;
+    public Log(String description, String action, String beforeState, String afterState, String idRegister, String table) {
         this.description = description;
         this.action = action;
         this.beforeState = beforeState;
         this.afterState = afterState;
         this.idRegister = idRegister;
+        this.table = table;
     }
 }

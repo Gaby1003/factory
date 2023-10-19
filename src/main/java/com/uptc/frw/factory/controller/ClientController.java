@@ -1,10 +1,13 @@
 package com.uptc.frw.factory.controller;
 
 import com.uptc.frw.factory.jpa.entity.Client;
+import com.uptc.frw.factory.jpa.entity.Log;
 import com.uptc.frw.factory.service.ClientService;
+import com.uptc.frw.factory.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Table;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,9 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
+    @Autowired
+    private LogService logService;
+
     @GetMapping
     public List<Client> findAll(){
         return service.findAllClient();
@@ -21,7 +27,10 @@ public class ClientController {
 
     @PostMapping
     public Client saveClient(@RequestBody Client client){
-        return service.saveClient(client);
+        Client clientToSave = service.saveClient(client);
+        logService.createLogIndex(new Log("Se agrega un registro", "POST", null,
+                clientToSave.toString(), clientToSave.getId().toString(),clientToSave.getClass().getSimpleName()));
+        return clientToSave;
     }
 
     @GetMapping("/{id}")
