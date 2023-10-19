@@ -1,7 +1,10 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Clientes")
@@ -23,6 +26,10 @@ public class Client {
 
     @Column(name = "NOMBRE_CONTACTO")
     private String contactName;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<PurchaseOrder> orders;
 
     public Client() {
     }
@@ -72,6 +79,14 @@ public class Client {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public List<PurchaseOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<PurchaseOrder> orders) {
+        this.orders = orders;
     }
 
     @Override

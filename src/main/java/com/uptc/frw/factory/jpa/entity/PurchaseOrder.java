@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDEN_COMPRAS")
@@ -23,7 +24,6 @@ public class PurchaseOrder {
     @Column(name = "ENTREGA_REAL")
     private Date realDelivery;
 
-    @JsonIgnore
     @Column(name = "ID_CLIENTE", insertable = false, updatable = false)
     private Long idClient;
 
@@ -31,6 +31,10 @@ public class PurchaseOrder {
     @ManyToOne
     @JoinColumn(name = "ID_CLIENTE", nullable = false)
     private Client client;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "order")
+    private List<PurchaseDetail> details;
 
     public PurchaseOrder() {
     }
@@ -88,6 +92,14 @@ public class PurchaseOrder {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<PurchaseDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<PurchaseDetail> details) {
+        this.details = details;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class Material {
     private Long idMaterial;
     @Column(name = "NOMBRE")
     private String name;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "material")
     private List<ProductType> productTypes;
 

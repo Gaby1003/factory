@@ -1,5 +1,7 @@
 package com.uptc.frw.factory.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,9 +20,13 @@ public class Product {
     private Double unitPrice;
     @Column(name = "ID_TIPO")
     private Long idType;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ID_TIPO")
+    @JoinColumn(name = "ID_TIPO", insertable = false, updatable = false)
     private ProductType productType;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<PurchaseDetail> purchaseDetails;
 
