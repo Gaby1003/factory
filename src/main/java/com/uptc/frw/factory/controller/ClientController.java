@@ -17,9 +17,6 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
-    @Autowired
-    private LogService logService;
-
     @GetMapping
     public List<Client> findAll(){
         return service.findAllClient();
@@ -27,10 +24,7 @@ public class ClientController {
 
     @PostMapping
     public Client saveClient(@RequestBody Client client){
-        Client clientToSave = service.saveClient(client);
-        logService.createLogIndex(new Log("Se agrega un registro", "POST", null,
-                clientToSave.toString(), clientToSave.getId().toString(),clientToSave.getClass().getSimpleName()));
-        return clientToSave;
+        return service.saveClient(client);
     }
 
     @GetMapping("/{id}")
