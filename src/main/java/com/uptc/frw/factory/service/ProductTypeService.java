@@ -17,7 +17,7 @@ public class ProductTypeService {
 
     public List<ProductType> productTypes(){
         List<ProductType> productTypes = repository.findAll();
-        logService.createLogList(productTypes.getClass().getSimpleName(),productTypes);
+        logService.createLogList(ProductType.class.getSimpleName(),productTypes);
         return productTypes;
     }
     public ProductType findProductType(Long idProductType){
@@ -27,15 +27,16 @@ public class ProductTypeService {
         return productType;
     }
     public ProductType saveProductType(ProductType productType){
-        logService.createLogAdd(productType.toString(), productType.getIdType().toString(),
+        ProductType productTypeAux = repository.save(productType);
+        logService.createLogAdd(productType.toString(), String.valueOf(productType.getIdType()),
                 productType.getClass().getSimpleName());
-        return repository.save(productType);
+        return productTypeAux;
     }
     public String updateProductType(Long idProductType,String type){
         ProductType productType = findProductType(idProductType);
-        ProductType productTypeAux = findProductType(idProductType);
+        String productTypeAux = findProductType(idProductType).toString();
         productType.setType(type);
-        logService.createLogUpdate(productTypeAux.toString(),productType.toString(),
+        logService.createLogUpdate(productTypeAux,productType.toString(),
                 productType.getIdType().toString(),productType.getClass().getSimpleName());
         repository.save(productType);
         return "Tipo de producto con ID "+idProductType+" actualizado con exito.";

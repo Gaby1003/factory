@@ -19,14 +19,15 @@ public class ClientService {
 
     public List<Client> findAllClient(){
         List<Client> clients = repository.findAll();
-        logService.createLogList(clients.getClass().getSimpleName(),clients);
+        logService.createLogList(Client.class.getSimpleName(),clients);
         return clients;
     }
 
     public Client saveClient(Client client){
-        logService.createLogAdd(client.toString(), client.getId().toString(),
+        Client clientAux = repository.save(client);
+        logService.createLogAdd(clientAux.toString(), String.valueOf(clientAux.getId()),
                 client.getClass().getSimpleName());
-        return repository.save(client);
+        return clientAux;
     }
 
     public Client findClient(Long id){
@@ -50,9 +51,9 @@ public class ClientService {
 
     public Client updatePhone(Long id, String phone){
         Client client = findClient(id);
-        Client clientAux = findClient(id);
+        String clientAux = findClient(id).toString();
         client.setPhone(phone);
-        logService.createLogUpdate(clientAux.toString(),client.toString(),
+        logService.createLogUpdate(clientAux,client.toString(),
                 client.getId().toString(),client.getClass().getSimpleName());
         return repository.save(client);
     }

@@ -17,14 +17,15 @@ public class SkillService {
 
     public List<Skill> findAllSkill() {
         List<Skill> skills = repository.findAll();
-        logService.createLogList(skills.getClass().getSimpleName(),skills);
+        logService.createLogList(Skill.class.getSimpleName(),skills);
         return skills;
     }
 
     public Skill saveSkill(Skill skill) {
-        logService.createLogAdd(skill.toString(), skill.getId().toString(),
+        Skill skillAux = repository.save(skill);
+        logService.createLogAdd(skill.toString(), String.valueOf(skillAux.getId()),
                 skill.getClass().getSimpleName());
-        return repository.save(skill);
+        return skillAux;
     }
 
     public Skill findSkill(Long id) {
@@ -42,9 +43,9 @@ public class SkillService {
     }
     public Skill updateDescription(Long id,String description){
         Skill skill = findSkill(id);
-        Skill skillAux = findSkill(id);
+        String skillAux = findSkill(id).toString();
         skill.setDescription(description);
-        logService.createLogUpdate(skillAux.toString(),skill.toString(),
+        logService.createLogUpdate(skillAux,skill.toString(),
                 skill.getId().toString(),skill.getClass().getSimpleName());
         return repository.save(skill);
     }

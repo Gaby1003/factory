@@ -17,7 +17,7 @@ public class ProductService {
 
     public List<Product> findAllProducts(){
         List<Product> products = repository.findAll();
-        logService.createLogList(products.getClass().getSimpleName(),products);
+        logService.createLogList(Product.class.getSimpleName(),products);
         return products;
     }
     public Product findProduct(Long idProduct){
@@ -27,15 +27,16 @@ public class ProductService {
         return product;
     }
     public Product saveProduct(Product product){
-        logService.createLogAdd(product.toString(), product.getIdProduct().toString(),
+        Product productAux = repository.save(product);
+        logService.createLogAdd(product.toString(), String.valueOf(product.getIdProduct()),
                 product.getClass().getSimpleName());
-        return repository.save(product);
+        return productAux;
     }
     public String updateProduct(Long idProduct,String name){
         Product product= findProduct(idProduct);
-        Product productAux= findProduct(idProduct);
+        String productAux= findProduct(idProduct).toString();
         product.setName(name);
-        logService.createLogUpdate(productAux.toString(),product.toString(),
+        logService.createLogUpdate(productAux,product.toString(),
                 product.getIdProduct().toString(),product.getClass().getSimpleName());
         repository.save(product);
         return "Producto con ID "+idProduct+" actualizado con exito.";

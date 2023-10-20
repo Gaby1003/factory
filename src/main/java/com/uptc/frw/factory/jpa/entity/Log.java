@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
-@Document(indexName = "logindex")
+@Document(indexName = "log_index")
 public class Log {
 
 

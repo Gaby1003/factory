@@ -18,14 +18,15 @@ public class MachineService {
 
     public List<Machine> findAllMachine(){
         List<Machine> machines = repository.findAll();
-        logService.createLogList(machines.getClass().getSimpleName(), machines);
+        logService.createLogList(Machine.class.getSimpleName(), machines);
         return machines;
     }
 
     public Machine saveMachine(Machine machine){
-        logService.createLogAdd(machine.toString(), machine.getSerialNumber().toString(),
+        Machine machineAux = repository.save(machine);
+        logService.createLogAdd(machine.toString(), String.valueOf(machineAux.getSerialNumber()),
                 machine.getClass().getSimpleName());
-        return repository.save(machine);
+        return machineAux ;
     }
 
     public Machine findMachine(Long id){
@@ -44,9 +45,9 @@ public class MachineService {
 
     public Machine updateModel(Long id, String model){
         Machine machine = findMachine(id);
-        Machine machineAux = findMachine(id);
+        String machineAux = findMachine(id).toString();
         machine.setModel(model);
-        logService.createLogUpdate(machineAux.toString(),machine.toString(),
+        logService.createLogUpdate(machineAux,machine.toString(),
                 machine.getSerialNumber().toString(),machine.getClass().getSimpleName());
         return saveMachine(machine);
     }

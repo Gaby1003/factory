@@ -18,15 +18,13 @@ public class MachineHistoryService {
 
     public List<MachineHistory> findAllMachineHistory(){
         List<MachineHistory> history = repository.findAll();
-        logService.createLogList(history.getClass().getSimpleName(),history);
+        //logService.createLogList(MachineHistory.class.getSimpleName(),history);
         return history;
     }
 
     public MachineHistory saveMachineHistory(MachineHistory machineHistory){
         MachineHistory history = repository.save(machineHistory);
-        logService.createLogAdd(history.toString(), new MachineHistoryKey(
-                        history.getWorkerId(), history.getMachineId(), history.getDate())
-                        .toString(),
+        logService.createLogAdd(history.toString(), history.toString(),
                 history.getClass().getSimpleName());
         return history;
     }

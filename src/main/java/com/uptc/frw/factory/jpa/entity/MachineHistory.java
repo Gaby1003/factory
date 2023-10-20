@@ -80,10 +80,8 @@ public class MachineHistory {
     public String toString() {
         return "MachineHistory{" +
                 "workerId=" + workerId +
-                ", machineId='" + machineId + '\'' +
+                ", machineId=" + machineId +
                 ", date=" + date +
-                ", machine=" + machine +
-                ", worker=" + worker +
                 '}';
     }
 }

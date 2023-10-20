@@ -19,14 +19,15 @@ public class PurchaseOrderService {
 
     public List<PurchaseOrder> findAllPurchaseOrder(){
         List<PurchaseOrder> orders = repository.findAll();
-        logService.createLogList(orders.getClass().getSimpleName(),orders);
+        logService.createLogList(PurchaseOrder.class.getSimpleName(),orders);
         return orders;
     }
 
     public PurchaseOrder savePurchaseOrder(PurchaseOrder purchaseOrder){
-        logService.createLogAdd(purchaseOrder.toString(), purchaseOrder.getId().toString(),
+        PurchaseOrder purchaseOrderAux = repository.save(purchaseOrder);
+        logService.createLogAdd(purchaseOrder.toString(), String.valueOf(purchaseOrder.getId()),
                 purchaseOrder.getClass().getSimpleName());
-        return repository.save(purchaseOrder);
+        return purchaseOrderAux;
     }
 
     public PurchaseOrder findPurchaseOrder(Long id){
@@ -45,9 +46,9 @@ public class PurchaseOrderService {
 
     public PurchaseOrder updateRealDelivery(Long id, Date realDelivery){
         PurchaseOrder purchaseOrder = findPurchaseOrder(id);
-        PurchaseOrder purchaseOrderAux = findPurchaseOrder(id);
+        String purchaseOrderAux = findPurchaseOrder(id).toString();
         purchaseOrder.setRealDelivery(realDelivery);
-        logService.createLogUpdate(purchaseOrderAux.toString(),purchaseOrder.toString(),
+        logService.createLogUpdate(purchaseOrderAux,purchaseOrder.toString(),
                 purchaseOrder.getId().toString(),purchaseOrder.getClass().getSimpleName());
         return repository.save(purchaseOrder);
     }

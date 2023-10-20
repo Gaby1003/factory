@@ -18,7 +18,7 @@ public class MaterialService {
 
     public List<Material> findAllMaterials(){
         List<Material> materials = repository.findAll();
-        logService.createLogList(materials.getClass().getSimpleName(),materials);
+        logService.createLogList(Material.class.getSimpleName(),materials);
         return materials;
     }
     public Material findMaterial(Long materialId){
@@ -28,15 +28,16 @@ public class MaterialService {
         return material;
     }
     public Material saveMaterial(Material material){
-        logService.createLogAdd(material.toString(), material.getIdMaterial().toString(),
+       Material materialAux = repository.save(material);
+        logService.createLogAdd(material.toString(), String.valueOf(materialAux.getIdMaterial()),
                 material.getClass().getSimpleName());
-        return repository.save(material);
+        return materialAux;
     }
     public String updateMaterial(Long idMaterial,String name){
         Material material = findMaterial(idMaterial);
-        Material materialAux = findMaterial(idMaterial);
+        String materialAux = findMaterial(idMaterial).toString();
         material.setName(name);
-        logService.createLogUpdate(materialAux.toString(),material.toString(),
+        logService.createLogUpdate(materialAux,material.toString(),
                 material.getIdMaterial().toString(),material.getClass().getSimpleName());
         repository.save(material);
         return "Material con ID "+idMaterial+" actualizado con exito.";

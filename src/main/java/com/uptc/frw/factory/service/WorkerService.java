@@ -25,13 +25,14 @@ public class WorkerService {
 
     public List<Worker> findAllWorker(){
         List<Worker> workers = repository.findAll();
-        logService.createLogList(workers.getClass().getSimpleName(),workers);
+        //logService.createLogList(Worker.class.getSimpleName(),workers);
         return workers;
     }
     public Worker saveWorker(Worker worker){
-        logService.createLogAdd(worker.toString(), worker.getId().toString(),
+        Worker workerAux = repository.save(worker);
+        logService.createLogAdd(worker.toString(), String.valueOf(workerAux.getId()),
                 worker.getClass().getSimpleName());
-        return repository.save(worker);
+        return workerAux;
     }
     public Worker findWorker(Long id){
         Worker worker =  repository.findById(id).get();
@@ -47,9 +48,9 @@ public class WorkerService {
     }
     public Worker updateAddress(Long id,String address){
         Worker worker = findWorker(id);
-        Worker workerAux = findWorker(id);
+        String workerAux = findWorker(id).toString();
         worker.setAddress(address);
-        logService.createLogUpdate(workerAux.toString(),worker.toString(),
+        logService.createLogUpdate(workerAux,worker.toString(),
                 worker.getId().toString(),worker.getClass().getSimpleName());
         return repository.save(worker);
     }

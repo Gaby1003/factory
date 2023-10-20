@@ -20,16 +20,17 @@ public class PurchaseDetailService {
 
     public List<PurchaseDetail> findAllPurchaseDetail(){
         List<PurchaseDetail> details = repository.findAll();
-        logService.createLogList(details.getClass().getSimpleName(),details);
+        logService.createLogList(PurchaseDetail.class.getSimpleName(),details);
         return details;
     }
 
     public PurchaseDetail savePurchaseDetail(PurchaseDetail purchaseDetail){
-        logService.createLogAdd(purchaseDetail.toString(), new  PurchaseDetailKey(
-                    purchaseDetail.getProductId(), purchaseDetail.getOrderId()
-                ).toString(),
+        PurchaseDetail purchaseDetailAux = repository.save(purchaseDetail);
+        PurchaseDetailKey purchaseDetailKey = new  PurchaseDetailKey(
+                purchaseDetail.getProductId(), purchaseDetail.getOrderId());
+        logService.createLogAdd(purchaseDetailAux.toString(), purchaseDetailKey.toString(),
                 purchaseDetail.getClass().getSimpleName());
-        return repository.save(purchaseDetail);
+        return purchaseDetailAux;
     }
 
     public PurchaseDetail findPurchaseDetail(PurchaseDetailKey id){
@@ -48,9 +49,9 @@ public class PurchaseDetailService {
 
     public PurchaseDetail updateQuantity(PurchaseDetailKey id, int quantity){
         PurchaseDetail purchaseDetail = findPurchaseDetail(id);
-        PurchaseDetail purchaseDetailAux = findPurchaseDetail(id);
+        String purchaseDetailAux = findPurchaseDetail(id).toString();
         purchaseDetail.setQuantity(quantity);
-        logService.createLogUpdate(purchaseDetailAux.toString(),purchaseDetail.toString(),
+        logService.createLogUpdate(purchaseDetailAux,purchaseDetail.toString(),
                 id.toString(),purchaseDetail.getClass().getSimpleName());
         return savePurchaseDetail(purchaseDetail);
     }
