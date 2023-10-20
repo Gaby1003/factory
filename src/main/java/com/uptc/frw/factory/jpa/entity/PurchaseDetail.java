@@ -38,10 +38,11 @@ public class PurchaseDetail {
     public PurchaseDetail() {
     }
 
-    public PurchaseDetail(int quantity, int unitPrice, PurchaseOrder order) {
+    public PurchaseDetail(Long productId, Long orderId, int quantity, int unitPrice) {
+        this.productId = productId;
+        this.orderId = orderId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-        this.order = order;
     }
 
     public Long getProductId() {

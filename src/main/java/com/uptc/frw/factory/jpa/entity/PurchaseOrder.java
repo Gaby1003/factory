@@ -39,11 +39,11 @@ public class PurchaseOrder {
     public PurchaseOrder() {
     }
 
-    public PurchaseOrder(Date purchaseDate, Date estimatedDelivery, Date realDelivery, Client client) {
+    public PurchaseOrder(Date purchaseDate, Date estimatedDelivery, Date realDelivery, Long idClient) {
         this.purchaseDate = purchaseDate;
         this.estimatedDelivery = estimatedDelivery;
         this.realDelivery = realDelivery;
-        this.client = client;
+        this.idClient = idClient;
     }
 
     public Long getId() {

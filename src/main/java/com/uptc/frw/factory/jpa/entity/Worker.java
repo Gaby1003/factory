@@ -38,13 +38,11 @@ public class Worker {
     public Worker() {
     }
 
-    public Worker(String name, String lastName, Date birthday, String address, List<Skill> skillList, List<MachineHistory> machineHistoryList) {
+    public Worker(String name, String lastName, Date birthday, String address) {
         this.name = name;
         this.lastName = lastName;
         this.birthday = birthday;
         this.address = address;
-        this.skillList = skillList;
-        this.machineHistoryList = machineHistoryList;
     }
 
     public Long getId() {

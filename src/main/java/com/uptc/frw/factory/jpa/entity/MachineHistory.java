@@ -36,6 +36,12 @@ public class MachineHistory {
     public MachineHistory() {
     }
 
+    public MachineHistory(Long workerId, Long machineId, Date date) {
+        this.workerId = workerId;
+        this.machineId = machineId;
+        this.date = date;
+    }
+
     public Long getWorkerId() {
         return workerId;
     }

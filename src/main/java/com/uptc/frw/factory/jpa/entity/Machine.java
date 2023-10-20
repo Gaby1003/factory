@@ -35,6 +35,13 @@ public class Machine {
     public Machine() {
     }
 
+    public Machine(Long serialNumber, String brand, String model, Date purchaseDate) {
+        this.serialNumber = serialNumber;
+        this.brand = brand;
+        this.model = model;
+        this.purchaseDate = purchaseDate;
+    }
+
     public Long getSerialNumber() {
         return serialNumber;
     }

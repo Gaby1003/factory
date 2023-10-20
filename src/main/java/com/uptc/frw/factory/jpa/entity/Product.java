@@ -41,23 +41,6 @@ public class Product {
         this.idType = idType;
     }
 
-    public Product(Long idProduct, String name, String description, Double unitPrice, Long idType) {
-        this.idProduct = idProduct;
-        this.name = name;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.idType = idType;
-    }
-
-    public Product(String name, String description, Double unitPrice, Long idType, ProductType productType, List<PurchaseDetail> purchaseDetails) {
-        this.name = name;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.idType = idType;
-        this.productType = productType;
-        this.purchaseDetails = purchaseDetails;
-    }
-
     public Long getIdProduct() {
         return idProduct;
     }
