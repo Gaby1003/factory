@@ -30,8 +30,8 @@ public class Log {
     @Field(type = FieldType.Text, name = "table")
     private String table;
 
-    @Field(type = FieldType.Long, name = "idRegister")
-    private Long idRegister;
+    @Field(type = FieldType.Text, name = "idRegister")
+    private String idRegister;
 
     @Field(type = FieldType.Date, name = "date")
     private Date date;
@@ -42,7 +42,7 @@ public class Log {
     public Log() {
     }
 
-    public Log(String description, String action, String beforeState, String afterState, Long idRegister, String table) {
+    public Log(String description, String action, String beforeState, String afterState, String idRegister, String table) {
         this.description = description;
         this.action = action;
         this.beforeState = beforeState;

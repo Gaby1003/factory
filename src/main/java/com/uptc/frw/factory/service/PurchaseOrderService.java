@@ -14,25 +14,41 @@ public class PurchaseOrderService {
     @Autowired
     public PurchaseOrderRepository repository;
 
+    @Autowired
+    private LogService logService;
+
     public List<PurchaseOrder> findAllPurchaseOrder(){
-        return repository.findAll();
+        List<PurchaseOrder> orders = repository.findAll();
+        logService.createLogList(orders.getClass().getSimpleName(),orders);
+        return orders;
     }
 
     public PurchaseOrder savePurchaseOrder(PurchaseOrder purchaseOrder){
+        logService.createLogAdd(purchaseOrder.toString(), purchaseOrder.getId().toString(),
+                purchaseOrder.getClass().getSimpleName());
         return repository.save(purchaseOrder);
     }
 
     public PurchaseOrder findPurchaseOrder(Long id){
-        return repository.findById(id).get();
+        PurchaseOrder order = repository.findById(id).get();
+        logService.createLogRead(order.toString(),order.getId().toString(),
+                order.getClass().getSimpleName());
+        return order;
     }
 
     public void deletePurchaseOrder(Long id){
+        PurchaseOrder order = repository.findById(id).get();
+        logService.createLogDelete(order.toString(),order.getId().toString(),
+                order.getClass().getSimpleName());
         repository.deleteById(id);
     }
 
     public PurchaseOrder updateRealDelivery(Long id, Date realDelivery){
         PurchaseOrder purchaseOrder = findPurchaseOrder(id);
+        PurchaseOrder purchaseOrderAux = findPurchaseOrder(id);
         purchaseOrder.setRealDelivery(realDelivery);
-        return savePurchaseOrder(purchaseOrder);
+        logService.createLogUpdate(purchaseOrderAux.toString(),purchaseOrder.toString(),
+                purchaseOrder.getId().toString(),purchaseOrder.getClass().getSimpleName());
+        return repository.save(purchaseOrder);
     }
 }

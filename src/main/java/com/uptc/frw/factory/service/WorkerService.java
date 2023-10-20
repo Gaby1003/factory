@@ -14,7 +14,8 @@ public class WorkerService {
     public WorkerRepository repository;
 
     @Autowired
-    private SkillService skillService;
+    private LogService logService;
+
     public List<Skill> saveSkillsWorker(Long id, List<Skill> skills){
         Worker worker = findWorker(id);
         worker.setSkillList(skills);
@@ -22,13 +23,34 @@ public class WorkerService {
         return skills;
     }
 
-    public List<Worker> findAllWorker(){return repository.findAll();}
-    public Worker saveWorker(Worker worker){return repository.save(worker);}
-    public Worker findWorker(Long id){return repository.findById(id).get();}
-    public  void deleteWorker(Long id){repository.deleteById(id); }
+    public List<Worker> findAllWorker(){
+        List<Worker> workers = repository.findAll();
+        logService.createLogList(workers.getClass().getSimpleName(),workers);
+        return workers;
+    }
+    public Worker saveWorker(Worker worker){
+        logService.createLogAdd(worker.toString(), worker.getId().toString(),
+                worker.getClass().getSimpleName());
+        return repository.save(worker);
+    }
+    public Worker findWorker(Long id){
+        Worker worker =  repository.findById(id).get();
+        logService.createLogRead(worker.toString(),worker.getId().toString(),
+                worker.getClass().getSimpleName());
+        return worker;
+    }
+    public  void deleteWorker(Long id){
+        Worker worker = repository.findById(id).get();
+        logService.createLogDelete(worker.toString(),worker.getId().toString(),
+                worker.getClass().getSimpleName());
+        repository.deleteById(id);
+    }
     public Worker updateAddress(Long id,String address){
         Worker worker = findWorker(id);
+        Worker workerAux = findWorker(id);
         worker.setAddress(address);
-        return saveWorker(worker);
+        logService.createLogUpdate(workerAux.toString(),worker.toString(),
+                worker.getId().toString(),worker.getClass().getSimpleName());
+        return repository.save(worker);
     }
 }

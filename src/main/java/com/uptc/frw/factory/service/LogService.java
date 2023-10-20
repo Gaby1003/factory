@@ -21,24 +21,24 @@ public class LogService {
         logRepository.save(log);
     }
 
-    public void createLogAdd(String data, Long id, String table){
+    public void createLogAdd(String data, String id, String table){
         String description = "creacion de nuevo registro en la base de datos";
         Log log = new Log(description,"CREATE",null,data,id,table);
         logRepository.save(log);
 
     }
-    public void createLogUpdate(String dataBefore,String dataAfter, Long id, String table){
+    public void createLogUpdate(String dataBefore,String dataAfter, String id, String table){
         String description = "actualización de registro en la base de datos";
         Log log = new Log(description,"UPDATE",dataBefore,dataAfter,id,table);
         logRepository.save(log);
     }
-    public void createLogDelete(String dataBefore, Long id, String table){
+    public void createLogDelete(String dataBefore, String id, String table){
         String description = "eliminación de registro en la base de datos";
         Log log = new Log(description,"DELETE",dataBefore,null,id,table);
         logRepository.save(log);
 
     }
-    public void createLogRead(String data, Long id, String table){
+    public void createLogRead(String data, String id, String table){
         String description = "lectura de registro en la base de datos";
         Log log = new Log(description,"READ",null,data,id,table);
         logRepository.save(log);

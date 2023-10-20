@@ -23,7 +23,7 @@ public class ProductController {
     }
     @PostMapping
     public Product saveProduct(@RequestBody Product product) {
-        return service.saveProdct(product);
+        return service.saveProduct(product);
     }
     @PutMapping("/{idProduct}")
     public String updateProduct(@PathVariable Long idProduct,@RequestParam String name) {

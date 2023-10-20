@@ -12,22 +12,40 @@ public class SkillService {
     @Autowired
     public SkillRepository repository;
 
+    @Autowired
+    private LogService logService;
+
     public List<Skill> findAllSkill() {
-        return repository.findAll();
+        List<Skill> skills = repository.findAll();
+        logService.createLogList(skills.getClass().getSimpleName(),skills);
+        return skills;
     }
 
     public Skill saveSkill(Skill skill) {
+        logService.createLogAdd(skill.toString(), skill.getId().toString(),
+                skill.getClass().getSimpleName());
         return repository.save(skill);
     }
 
     public Skill findSkill(Long id) {
+        Skill skill = repository.findById(id).get();
+        logService.createLogRead(skill.toString(),skill.getId().toString(),
+                skill.getClass().getSimpleName());
         return repository.findById(id).get();
     }
 
-    public void deleteSkill(Long id) { repository.deleteById(id);}
+    public void deleteSkill(Long id) {
+        Skill skill = repository.findById(id).get();
+        logService.createLogDelete(skill.toString(),skill.getId().toString(),
+                skill.getClass().getSimpleName());
+        repository.deleteById(id);
+    }
     public Skill updateDescription(Long id,String description){
         Skill skill = findSkill(id);
+        Skill skillAux = findSkill(id);
         skill.setDescription(description);
-        return saveSkill(skill);
+        logService.createLogUpdate(skillAux.toString(),skill.toString(),
+                skill.getId().toString(),skill.getClass().getSimpleName());
+        return repository.save(skill);
     }
 }

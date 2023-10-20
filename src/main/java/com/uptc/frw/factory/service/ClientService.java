@@ -24,20 +24,23 @@ public class ClientService {
     }
 
     public Client saveClient(Client client){
-        logService.createLogAdd(client.toString(), client.getId(),client.getClass().getSimpleName());
+        logService.createLogAdd(client.toString(), client.getId().toString(),
+                client.getClass().getSimpleName());
         return repository.save(client);
     }
 
     public Client findClient(Long id){
         Client client = repository.findById(id).get();
-        logService.createLogRead(client.toString(),client.getId(),client.getClass().getSimpleName());
+        logService.createLogRead(client.toString(),client.getId().toString(),
+                client.getClass().getSimpleName());
         return client;
     }
 
     public void deleteClient(Long id){
         try {
             Client client = repository.findById(id).get();
-            logService.createLogDelete(client.toString(),client.getId(),client.getClass().getSimpleName());
+            logService.createLogDelete(client.toString(),client.getId().toString(),
+                    client.getClass().getSimpleName());
             repository.deleteById(id);
 
         }catch (NoSuchElementException e){
@@ -49,8 +52,9 @@ public class ClientService {
         Client client = findClient(id);
         Client clientAux = findClient(id);
         client.setPhone(phone);
-        logService.createLogUpdate(clientAux.toString(),client.toString(),client.getId(),client.getClass().getSimpleName());
-        return saveClient(client);
+        logService.createLogUpdate(clientAux.toString(),client.toString(),
+                client.getId().toString(),client.getClass().getSimpleName());
+        return repository.save(client);
     }
 
 

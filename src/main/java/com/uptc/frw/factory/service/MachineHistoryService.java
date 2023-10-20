@@ -13,20 +13,35 @@ public class MachineHistoryService {
 
     @Autowired
     public MachineHistoryRepository repository;
+    @Autowired
+    private LogService logService;
 
     public List<MachineHistory> findAllMachineHistory(){
-        return repository.findAll();
+        List<MachineHistory> history = repository.findAll();
+        logService.createLogList(history.getClass().getSimpleName(),history);
+        return history;
     }
 
     public MachineHistory saveMachineHistory(MachineHistory machineHistory){
-        return repository.save(machineHistory);
+        MachineHistory history = repository.save(machineHistory);
+        logService.createLogAdd(history.toString(), new MachineHistoryKey(
+                        history.getWorkerId(), history.getMachineId(), history.getDate())
+                        .toString(),
+                history.getClass().getSimpleName());
+        return history;
     }
 
     public MachineHistory findMachineHistory(MachineHistoryKey id){
-        return repository.findById(id).get();
+        MachineHistory history = repository.findById(id).get();
+        logService.createLogRead(history.toString(), id.toString(),
+                   history.getClass().getSimpleName());
+        return history;
     }
 
     public void deleteMachineHistory(MachineHistoryKey id){
+        MachineHistory history = repository.findById(id).get();
+        logService.createLogDelete(history.toString(), id.toString(),
+                history.getClass().getSimpleName());
         repository.deleteById(id);
     }
 
