@@ -20,7 +20,7 @@ public class PurchaseDetailService {
 
     public List<PurchaseDetail> findAllPurchaseDetail(){
         List<PurchaseDetail> details = repository.findAll();
-        logService.createLogList(PurchaseDetail.class.getSimpleName(),details);
+        //logService.createLogList(PurchaseDetail.class.getSimpleName(),details);
         return details;
     }
 

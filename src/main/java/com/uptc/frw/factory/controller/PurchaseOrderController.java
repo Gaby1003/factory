@@ -5,6 +5,8 @@ import com.uptc.frw.factory.service.PurchaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +38,8 @@ public class PurchaseOrderController {
     }
 
     @PutMapping("/{id}")
-    public PurchaseOrder updateRealDelivery(@PathVariable Long id, @RequestParam Date realDelivery){
-        return service.updateRealDelivery(id, realDelivery);
+    public PurchaseOrder updateRealDelivery(@PathVariable Long id, @RequestBody String realDelivery) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        return service.updateRealDelivery(id, format.parse(realDelivery));
     }
 }

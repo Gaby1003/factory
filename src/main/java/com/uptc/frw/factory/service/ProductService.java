@@ -17,7 +17,7 @@ public class ProductService {
 
     public List<Product> findAllProducts(){
         List<Product> products = repository.findAll();
-        logService.createLogList(Product.class.getSimpleName(),products);
+        //logService.createLogList(Product.class.getSimpleName(),products);
         return products;
     }
     public Product findProduct(Long idProduct){

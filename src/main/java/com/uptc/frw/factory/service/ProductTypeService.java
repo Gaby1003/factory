@@ -15,9 +15,9 @@ public class ProductTypeService {
     @Autowired
     private LogService logService;
 
-    public List<ProductType> productTypes(){
+    public List<ProductType> findAllProductTypes(){
         List<ProductType> productTypes = repository.findAll();
-        logService.createLogList(ProductType.class.getSimpleName(),productTypes);
+        //logService.createLogList(ProductType.class.getSimpleName(),productTypes);
         return productTypes;
     }
     public ProductType findProductType(Long idProductType){

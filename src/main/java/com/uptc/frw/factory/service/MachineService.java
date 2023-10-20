@@ -18,7 +18,7 @@ public class MachineService {
 
     public List<Machine> findAllMachine(){
         List<Machine> machines = repository.findAll();
-        logService.createLogList(Machine.class.getSimpleName(), machines);
+        //logService.createLogList(Machine.class.getSimpleName(), machines);
         return machines;
     }
 

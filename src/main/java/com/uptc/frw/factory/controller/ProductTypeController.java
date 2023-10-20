@@ -15,7 +15,7 @@ public class ProductTypeController {
 
     @GetMapping
     public List<ProductType> productTypes() {
-        return service.productTypes();
+        return service.findAllProductTypes();
     }
     @GetMapping("/{idProductType}")
     public ProductType findProductType(@PathVariable Long idProductType) {

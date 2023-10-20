@@ -19,7 +19,7 @@ public class PurchaseOrderService {
 
     public List<PurchaseOrder> findAllPurchaseOrder(){
         List<PurchaseOrder> orders = repository.findAll();
-        logService.createLogList(PurchaseOrder.class.getSimpleName(),orders);
+        //logService.createLogList(PurchaseOrder.class.getSimpleName(),orders);
         return orders;
     }
 
